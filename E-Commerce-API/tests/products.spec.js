@@ -16,3 +16,20 @@ describe("GET /products", () => {
     );
   });
 });
+
+describe("GET /products", () => {
+  it("should return product by name", async () => {
+    const response = await request(app).get("/products");
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: expect.any(String),
+          price: expect.any(Number),
+          supplierName: expect.any(String),
+        }),
+      ])
+    );
+  });
+});
+
